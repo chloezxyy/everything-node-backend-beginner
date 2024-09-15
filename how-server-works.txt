@@ -1,0 +1,29 @@
+HTTP request/response cycle
+1. User types in a URL in the browser and presses enter.
+2. The browser sends a request to the server.
+3. The server processes the request and sends back a response.
+4. The browser receives the response and displays the content on the page.
+
+      http request messages
+        -- request -->
+Client      data         node/express (Server)
+        <-- response --
+      http response messages
+
+A server is just a computer whose job is to ensure that resource available.
+
+HTTP Message
+Client                              Server
+Request message         |           Response message
+1. Method                           1. Status code - result of the request
+2. URL                              2. Status Text
+3. Headers (Pragma, Referer)        3. Headers (Content-Type)
+4. Body (Optional)                  4. Body/Payload (Optional - to add resource to the server)
+
+Headers are key-value pairs that provide additional information about the request or response.
+
+HTTP Methods
+GET     Create a new resource
+POST    Read a resource
+PUT     Update a resource
+DELETE  Delete a resource

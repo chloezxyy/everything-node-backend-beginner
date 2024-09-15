@@ -28,3 +28,5 @@ readFile('./content/first.txt', 'utf-8', (err, result) => {
 })
 
 console.log('starting next task')
+
+// can write this code in a more readable way using promises, async/await

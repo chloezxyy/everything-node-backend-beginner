@@ -1,5 +1,5 @@
 
-// asynchronous
+// asynchronous - blocking code
 const { readFile, writeFile } = require('fs');
 
 console.log('start')
