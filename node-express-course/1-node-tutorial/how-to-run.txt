@@ -1,0 +1,11 @@
+## How to create projects
+####To  create node only projects
+
+1. Run `npm i` in the folder, and other installation needed (e.g. `nodemon`)
+2. Create the `app.js` file - the file can be named as anything
+3. To run the server `node app.js`
+
+
+## How to run the project
+For `node` only projects, run this command `node app.js`
+For `express` projects (plus `node`), run this command `npm run start/dev`
