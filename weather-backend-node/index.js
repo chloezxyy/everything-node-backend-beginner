@@ -1,4 +1,5 @@
-const { readFile, writeFile } = require("fs").promises;
+const { readFile } = require("fs").promises;
+const { writeFileSync } = require("fs");
 
 async function processWeatherData() {
   try {
@@ -54,8 +55,10 @@ async function processWeatherData() {
 
 async function writeWeatherData() {
   try {
-    const weatherString = await processWeatherData();
-    console.log({ weatherString });
-  } catch (e) {}
+    const content = await processWeatherData();
+    writeFileSync("./data/average_temp_by_city.txt", content);
+  } catch (e) {
+    console.error("write to average_temp_by_city.txt file error");
+  }
 }
 writeWeatherData();
