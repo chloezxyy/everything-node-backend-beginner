@@ -14,8 +14,10 @@ const start = async () => {
     await Product.deleteMany();
     await Product.create(jsonProducts); // dynamically create products
     console.log("Success");
+    process.exit(0); // to exit the process once it has been successful
   } catch (e) {
     console.log(e);
+    process.exit(1);
   }
 };
 
