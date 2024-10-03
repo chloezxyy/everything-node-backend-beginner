@@ -1,12 +1,24 @@
 const Product = require("../models/product");
 
 const getAllProductsStatic = async (req, res) => {
-  const products = await Product.find({}).select("name price");
+  const products = await Product.find({})
+    .sort("name")
+    .select("name price")
+    .limit(4)
+    .skip(5);
   res.status(200).json({ products, nHits: products.length });
 };
 
 const getAllProducts = async (req, res) => {
-  const { featured, company, name, sort, fields } = req.query;
+  const {
+    featured,
+    company,
+    name,
+    sort,
+    fields,
+    page: pageRequested,
+    limit: limitRequested,
+  } = req.query;
   const queryObject = {};
 
   if (featured) {
@@ -32,6 +44,14 @@ const getAllProducts = async (req, res) => {
     const fieldList = fields.split(",").join(" ");
     results = results.select(fieldList);
   }
+
+  const page = Number(pageRequested) || 1;
+  const limit = Number(limitRequested) || 10;
+
+  const skipped = (page - 1) * limit;
+
+  results = results.skip(skipped).limit(limit);
+
   const products = await results; // here with `await`, it returns an array of products
   res.status(200).json({ products, nbHits: products.length });
 };
