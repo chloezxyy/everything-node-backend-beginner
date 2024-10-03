@@ -7,7 +7,7 @@ const getAllProductsStatic = async (req, res) => {
 };
 
 const getAllProducts = async (req, res) => {
-  const { featured, company, name } = req.query;
+  const { featured, company, name, sort } = req.query;
   const queryObject = {};
 
   if (featured) {
@@ -20,8 +20,17 @@ const getAllProducts = async (req, res) => {
   if (name) {
     queryObject.name = { $regex: name, $options: "i" };
   }
-  console.log({ queryObject });
-  const products = await Product.find(queryObject);
+  // console.log({ queryObject });
+  let results = Product.find(queryObject); // without `await` it returns a query object
+
+  if (sort) {
+    const sortList = sort.split(",").join(" ");
+    results = results.sort(sortList);
+  } else {
+    // default sorting - based on the time that it was created
+    results = results.sort("createdAt");
+  }
+  const products = await results; // here with `await`, it returns an array of products
   res.status(200).json({ products, nbHits: products.length });
 };
 
